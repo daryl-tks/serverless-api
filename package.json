@@ -2,15 +2,26 @@
   "name": "openfaas-node12",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no tests specified\" && exit 0"
+    "test": "echo \"Error: no tests specified\" && exit 0",
+    "start1": "nodemon index.js",
+    "start": "nodemon ./bin/www"
   },
   "keywords": [],
   "author": "OpenFaaS Ltd",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "express": "^4.16.2"
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.1",
+    "express": "^4.16.2",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.16"
   }
 }
