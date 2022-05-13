@@ -47,7 +47,7 @@ RUN npm test
 WORKDIR /home/app/
 
 ENV cgi_headers="true"
-ENV fprocess="node index.js"
+ENV fprocess="node app.js"
 ENV mode="http"
 ENV upstream_url="http://127.0.0.1:3000"
 
