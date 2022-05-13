@@ -5,27 +5,17 @@
 'use strict';
 
 require('dotenv').config();
-
 const express = require('express');
-const handler = require('./functions/handler');
-const bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const cors = require('cors');
-
-// const getUsers = require('./functions/users/get-users');
-
 const app = express();
+const handler = require('./routes/handler');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const defaultMaxSize = '100kb'; // body-parser default
 
 app.disable('x-powered-by');
-
-app.use(cors());
-app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cors());
 
 const rawLimit = process.env.MAX_RAW_SIZE || defaultMaxSize;
 const jsonLimit = process.env.MAX_JSON_SIZE || defaultMaxSize;
@@ -35,13 +25,11 @@ app.use(function addDefaultContentType(req, res, next) {
   // nil, and has been a source of contention for new users.
 
   if (!req.headers['content-type']) {
-    req.headers['content-type'] = 'text/plain';
+    req.headers['content-type'] = 'application/json';
   }
+
   next();
 });
-
-// @DESC -> ROUTES
-// app.use('/users', getUsers);
 
 if (process.env.RAW_BODY === 'true') {
   app.use(bodyParser.raw({ type: '*/*', limit: rawLimit }));
@@ -156,8 +144,8 @@ app.put('/*', middleware);
 app.delete('/*', middleware);
 app.options('/*', middleware);
 
-const port = process.env.http_port || 3000;
+const port = process.env.http_port || 8000;
 
 app.listen(port, () => {
-  console.log(`Server listening on port: ${port}`);
+  console.log(`Server is running on port: ${port}`);
 });
