@@ -4,7 +4,7 @@ provider:
   name: openfaas
   gateway: http://127.0.0.1:8080
 functions:
-  functions:
+  routes:
     lang: node12
-    handler: ./functions
+    handler: ./routes
     image: conversion-registry/conversion:latest

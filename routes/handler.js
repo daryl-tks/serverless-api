@@ -1,6 +1,6 @@
 'use strict';
 
-const { getUsers } = require('../service/users/get-users');
+// const { getUsers } = require('../service/users/get-users');
 
 module.exports = async (event, context) => {
   const result = {
