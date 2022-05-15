@@ -7,3 +7,4 @@ functions:
     lang: node12
     handler: ./conversion
     image: conversion-registry/conversion:latest
+
