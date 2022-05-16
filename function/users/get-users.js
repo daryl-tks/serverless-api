@@ -8,12 +8,14 @@ const getUsers = async (_event, context) => {
       .query('SELECT * FROM users')
       .then(([rows, _fields]) => rows);
 
-    if (result.length) {
-      return await context
-        .headers({ 'Content-Type': 'Application/Json' })
-        .status(200)
-        .succeed(JSON.stringify({ data: result }));
-    }
+    // if (result.length) {
+    //   return await context
+    //     .headers({ 'Content-Type': 'Application/Json' })
+    //     .status(200)
+    //     .succeed(JSON.stringify({ data: result }));
+    // }
+
+    return result;
   } catch (error) {
     throw console.error({ get_users_error: error });
   }
