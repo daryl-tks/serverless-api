@@ -6,6 +6,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
 // const connection = require('./utils/connection');
 var mysql = require('mysql2');
 require('dotenv').config();
@@ -31,6 +32,7 @@ connection.connect((err) => {
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'pug');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -42,9 +44,15 @@ app.get('/', function (req, res, next) {
 });
 
 app.get('/users', function (_, res) {
-  connection.query('SELECT * FROM users', (err, result) => {
-    !err ? res.send({ data: result }) : res.status(400).send({ err_msg: err });
-  });
+  try {
+    connection.query('SELECT * FROM users', (err, result) => {
+      !err
+        ? res.send({ data: result })
+        : res.status(400).send({ err_msg: err });
+    });
+  } catch (error) {
+    console.error({ error });
+  }
 });
 
 // app.use('/', );
