@@ -38,15 +38,13 @@ app.get('/', function (req, res, next) {
   res.send({ module: 'Conversion API v1' });
 });
 
-app.get('/users', function (_, res) {
+app.get('/users', function (req, res) {
   try {
     connection.query('SELECT * FROM users', (err, result) => {
-      !err
-        ? res.send({ data: result })
-        : res.status(400).send({ err_msg: err });
+      console.log('RESULT', result);
+      console.log('Error', err);
+      !err ? res.send({ data: result }) : res.send({ err_msg: err });
     });
-
-    connection.end();
   } catch (error) {
     console.error({ error });
   }
