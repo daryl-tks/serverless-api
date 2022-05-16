@@ -20,21 +20,18 @@ module.exports = async (event, context) => {
 };
 
 const getUsers = (_event, context) => {
-  // try {
-  // const result = await connection
-  //   .promise()
-  //   .query('SELECT * FROM users')
-  //   .then(([rows, _fields]) => rows)
-  //   .catch((err) => console.error({ err }));
+  try {
+    // const result = await connection
+    //   .promise()
+    //   .query('SELECT * FROM users')
+    //   .then(([rows, _fields]) => rows)
+    //   .catch((err) => console.error({ err }));
 
-  connection.connect((err) => {
-    !!err ? console.log('ERROR', err) : console.log('DB SERVER CONNECTED');
-  });
+    // connection.connect((err) => {
+    //   !!err ? console.log('ERROR', err) : console.log('DB SERVER CONNECTED');
+    // // });
 
-  return context
-    .headers({ 'Content-Type': 'Application/Json' })
-    .status(200)
-    .succeed({
+    const result = {
       data: [
         {
           user_id: 1,
@@ -42,8 +39,13 @@ const getUsers = (_event, context) => {
           created_at: '2022-05-15T17:29:04.000Z',
         },
       ],
-    });
-  // } catch (error) {
-  //   throw console.error({ get_users_error: error });
-  // }
+    };
+
+    return context
+      .headers({ 'Content-Type': 'Application/Json' })
+      .status(200)
+      .succeed(JSON.stringify(result));
+  } catch (error) {
+    throw console.error({ get_users_error: error });
+  }
 };
