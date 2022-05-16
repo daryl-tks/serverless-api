@@ -1,24 +1,25 @@
 'use strict';
 // const { getUsers } = require('../services/users/get-users.js');
-const connection = require('../utils/connection.js');
+// const connection = require('../utils/connection.js');
 
 // module.exports = async (event, context) => {
-//   const result = {
-//     body: JSON.stringify(event.body),
-//     'content-type': event.headers['content-type'],
-//   };
 
 //   return context.status(200).succeed(result);
 // };
 
-module.exports = (event, context) => {
+module.exports = async (event, context) => {
   if (event.path == '/users') {
-    return getUsers(event, context);
+    return context.status(200).succeed(['Jean', 'Joe', 'jane']);
   }
 
-  return context.status(200).succeed('Welcome to conversion API');
+  const result = {
+    body: 'Welcome to conversion API',
+    'content-type': event.headers['content-type'],
+  };
+
+  return context.status(200).succeed(result);
 };
 
-function getUsers(event, context) {
-  return context.status(200).succeed(['Jean', 'Joe', 'jane']);
-}
+// async function getUsers(event, context) {
+//   return context.status(200).succeed(['Jean', 'Joe', 'jane']);
+// }
