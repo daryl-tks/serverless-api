@@ -9,10 +9,6 @@ var express = require('express');
 var createError = require('http-errors');
 var cookieParser = require('cookie-parser');
 
-// const connection = require('./utils/connection');
-// var indexRouter = require('./services/index');
-// var usersRouter = require('./services/users/get-users');
-
 var app = express();
 
 var connection = mysql.createConnection({
@@ -40,11 +36,10 @@ app.get('/', function (req, res, next) {
 
 app.get('/users', function (req, res) {
   try {
-    connection.query('SELECT * FROM users', (err, result) => {
-      console.log('RESULT', result);
-      console.log('Error', err);
-
-      !err ? res.send({ data: result }) : res.send({ err_msg: err });
+    connection.query('SELECT * FROM conversion.users', (err, result) => {
+      !err
+        ? res.send({ data: result })
+        : res.status(500).send({ err_msg: err });
     });
   } catch (error) {
     console.error({ error });
@@ -52,8 +47,30 @@ app.get('/users', function (req, res) {
   }
 });
 
-// app.use('/', );
-// app.use('/users', usersRouter);
+app.post('/users', function (req, res) {
+  const username = req.body.username;
+
+  connection.query(
+    'SELECT username FROM users WHERE username = ?',
+    [username],
+    (err, result) => {
+      if (result.length) {
+        res.status(400).send({ error: 'Username already exist', code: 400 });
+      } else {
+        connection.query(
+          'INSERT INTO users SET ?',
+          [{ username }],
+          (error, result) =>
+            result.insertId
+              ? res
+                  .status(201)
+                  .send({ message: 'Successfully created new user' })
+              : res.status(400).send({ error, code: 400 })
+        );
+      }
+    }
+  );
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
