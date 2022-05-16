@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.send({ name: 'HELLO WORLD' });
+  res.send({ module: 'Conversion API v1' });
 });
 
 module.exports = router;
