@@ -12,7 +12,7 @@ const getUsers = async (_event, context) => {
     return context
       .headers({ 'Content-Type': 'Application/Json' })
       .status(200)
-      .succeed({ data: result });
+      .succeed(JSON.stringify({ data: result }));
   } catch (error) {
     throw console.error({ get_users_error: error });
   }
