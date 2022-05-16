@@ -2,10 +2,10 @@
   "name": "openfaas-node12",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no tests specified\" && exit 0",
-    "start": "nodemon index.js"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "OpenFaaS Ltd",
@@ -17,6 +17,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.16.2",
     "http": "^0.0.1-security",
+    "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.16"
