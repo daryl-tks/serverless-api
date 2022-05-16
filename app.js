@@ -8,20 +8,9 @@ var logger = require('morgan');
 var express = require('express');
 var createError = require('http-errors');
 var cookieParser = require('cookie-parser');
+var connection = require('./function/connection');
 
 var app = express();
-
-var connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB,
-  port: process.env.DB_PORT,
-});
-
-connection.connect((err) => {
-  !!err ? console.log('ERROR', err) : console.log('DB SERVER CONNECTED');
-});
 
 app.use(cors());
 app.use(logger('dev'));
