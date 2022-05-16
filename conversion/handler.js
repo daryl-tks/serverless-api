@@ -19,7 +19,3 @@ module.exports = async (event, context) => {
 
   return context.status(200).succeed(result);
 };
-
-function getUsers(event, context) {
-  return context.status(200).succeed(['Jean', 'Joe', 'jane']);
-}
