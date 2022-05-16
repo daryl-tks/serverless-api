@@ -50,6 +50,8 @@ app.get('/users', function (_, res) {
         ? res.send({ data: result })
         : res.status(400).send({ err_msg: err });
     });
+
+    connection.end();
   } catch (error) {
     console.error({ error });
   }
