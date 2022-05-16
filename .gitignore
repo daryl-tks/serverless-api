@@ -1,3 +1,7 @@
 template
 build
 node_modules
+package-lock.json
+
+# function
+function/package-lock.json
