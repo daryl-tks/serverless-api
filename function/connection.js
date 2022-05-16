@@ -8,13 +8,15 @@ try {
   );
 }
 
-var connection = mysql.createConnection({
-  host: process.env.DB_HOST,
+var db_config = {
+  host: process.env.DB_HOST_PRIVATE,
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB,
   port: process.env.DB_PORT,
-});
+};
+
+var connection = mysql.createConnection(db_config);
 
 //- Establish a new connection
 connection.connect(function (err) {
@@ -38,7 +40,7 @@ function reconnect(connection) {
   if (connection) connection.destroy();
 
   //- Create a new one
-  var connection = mysql_npm.createConnection(db_config);
+  var connection = mysql.createConnection(db_config);
 
   //- Try to reconnect
   connection.connect(function (err) {
