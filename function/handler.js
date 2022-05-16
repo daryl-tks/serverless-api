@@ -1,34 +1,27 @@
 'use strict';
-
-const getUsers = require('./users/get-users');
-
-// module.exports = async (event, context) => {
-//   if (event.path == '/users') {
-//     return context.status(200).succeed(['Jean', 'Joe', 'jane']);
-//   }
-
-//   const result = {
-//     body: 'Welcome to conversion API',
-//     'content-type': event.headers['content-type'],
-//   };
-
-//   return context.status(200).succeed(result);
-// };
-
-// function getUsers(event, context) {
-//   return context.status(200).succeed(['Jean', 'Joe', 'jane']);
-// }
+const connection = require('./connection');
 
 module.exports = async (event, context) => {
   if (event.path == '/users') {
-    console.log('event.path', event.path);
-
     return getUsers(event, context);
   }
 
   return context.status(200).succeed('Welcome to conversion API');
 };
 
-// function users(event, context) {
-//   return context.status(200).succeed(['Jean', 'Joe', 'jane']);
-// }
+const getUsers = async (_event, context) => {
+  try {
+    const result = await connection
+      .promise()
+      .query('SELECT * FROM users')
+      .then(([rows, _fields]) => rows)
+      .catch((err) => console.error({ err }));
+
+    return context
+      .headers({ 'Content-Type': 'Application/Json' })
+      .status(200)
+      .succeed({ data: result });
+  } catch (error) {
+    throw console.error({ get_users_error: error });
+  }
+};
