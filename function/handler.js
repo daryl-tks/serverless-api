@@ -21,7 +21,7 @@ const getUsers = require('./users/get-users');
 
 module.exports = async (event, context) => {
   if (event.path == '/users') {
-    console.log('event.path'.event.path);
+    console.log('event.path', event.path);
 
     return await getUsers(event, context);
   }
