@@ -3,23 +3,17 @@ const connection = require('../connection');
 
 const getUsers = async (_event, context) => {
   try {
-    // const result = await connection
-    //   .promise()
-    //   .query('SELECT * FROM users')
-    //   .then(([rows, _fields]) => rows);
+    const result = await connection
+      .promise()
+      .query('SELECT * FROM users')
+      .then(([rows, _fields]) => rows);
 
-    const data = [
-      {
-        user_id: 1,
-        username: 'hello',
-        created_at: '2022-05-15T17:29:04.000Z',
-      },
-    ];
-
-    return await context
-      .headers({ 'Content-Type': 'Application/Json' })
-      .status(200)
-      .succeed(JSON.stringify({ data }));
+    if (result.length) {
+      return await context
+        .headers({ 'Content-Type': 'Application/Json' })
+        .status(200)
+        .succeed(JSON.stringify({ data: result }));
+    }
   } catch (error) {
     throw console.error({ get_users_error: error });
   }
