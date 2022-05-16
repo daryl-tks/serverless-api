@@ -23,7 +23,7 @@ module.exports = async (event, context) => {
   if (event.path == '/users') {
     console.log('event.path', event.path);
 
-    return await getUsers(event, context);
+    return getUsers(event, context);
   }
 
   return context.status(200).succeed('Welcome to conversion API');

@@ -3,13 +3,15 @@ const connection = require('../connection');
 
 const getUsers = async (_event, context) => {
   try {
+    console.log('GETUSErS');
+
     const result = await connection
       .promise()
       .query('SELECT * FROM users')
       .then(([rows, _fields]) => rows)
       .catch((err) => console.error({ err }));
 
-    console.log(result);
+    console.log('result,', result);
 
     return context
       .headers({ 'Content-Type': 'Application/Json' })
