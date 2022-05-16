@@ -2,7 +2,7 @@
   "name": "openfaas-node12",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no tests specified\" && exit 0",
     "start": "nodemon app.js"

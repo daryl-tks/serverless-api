@@ -13,13 +13,13 @@ module.exports = async (event, context) => {
   }
 
   const result = {
-    body: 'Welcome to conversion API',
+    body: 'Welcome to conversion API (conversion)',
     'content-type': event.headers['content-type'],
   };
 
   return context.status(200).succeed(result);
 };
 
-// async function getUsers(event, context) {
-//   return context.status(200).succeed(['Jean', 'Joe', 'jane']);
-// }
+function getUsers(event, context) {
+  return context.status(200).succeed(['Jean', 'Joe', 'jane']);
+}

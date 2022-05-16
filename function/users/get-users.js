@@ -5,22 +5,20 @@ const getUsers = async (_event, context) => {
     const result = await connection
       .promise()
       .query('SELECT user_id, username, created_at FROM users')
-      .then(([rows], _fields) => JSON.stringify(rows));
+      .then((rows, _fields) => rows);
 
-    connection.end();
-
-    if (result.length) {
-      return context
-        .headers({ 'Content-Type': 'Application/Json' })
-        .status(200)
-        .succeed({ data: JSON.parse(result) });
-    }
+    // if (result.length) {
+    //   return context
+    //     .headers({ 'Content-Type': 'Application/Json' })
+    //     .status(200)
+    //     .succeed({ data: result });
+    // }
 
     return context
       .headers({ 'Content-Type': 'Application/Json' })
       .status(200)
       .succeed({
-        data: JSON.parse([
+        data: JSON.stringify([
           {
             user_id: 1,
             username: 'hello123',

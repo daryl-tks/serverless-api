@@ -7,5 +7,5 @@ module.exports = (event, context) => {
     return getUsers(event, context);
   }
 
-  return context.status(200).succeed('Welcome to conversion API');
+  return context.status(200).succeed('Welcome to conversion API (function)');
 };
