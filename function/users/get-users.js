@@ -5,32 +5,16 @@ const getUsers = async (_event, context) => {
     const result = await connection
       .promise()
       .query('SELECT user_id, username, created_at FROM users')
-      .then((rows, _fields) => rows);
+      .then(async ([rows], _fields) => await rows);
 
-    // if (result.length) {
-    //   return context
-    //     .headers({ 'Content-Type': 'Application/Json' })
-    //     .status(200)
-    //     .succeed({ data: result });
-    // }
+    connection.end();
 
-    return context
-      .headers({ 'Content-Type': 'Application/Json' })
-      .status(200)
-      .succeed({
-        data: JSON.stringify([
-          {
-            user_id: 1,
-            username: 'hello123',
-            created_at: '2022-05-15T17:29:04.000Z',
-          },
-          {
-            user_id: 2,
-            username: 'world123',
-            created_at: '2022-05-15T19:55:14.000Z',
-          },
-        ]),
-      });
+    if (result.length) {
+      return await context
+        // .headers({ 'Content-Type': 'Application/Json' })
+        .status(200)
+        .succeed({ data: result });
+    }
   } catch (error) {
     throw console.error({ get_users_error: error });
   }
