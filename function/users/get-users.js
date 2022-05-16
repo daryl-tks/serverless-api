@@ -1,14 +1,12 @@
 const res = require('express/lib/response');
-const connection = require('../../utils/connection');
+const connection = require('../connection');
 
 const getUsers = async (_event, context) => {
   try {
     const result = await connection
       .promise()
       .query('SELECT * FROM users')
-      .then(([rows, _fields]) => {
-        return rows;
-      })
+      .then(([rows, _fields]) => rows)
       .catch((err) => console.error({ err }));
 
     return context
