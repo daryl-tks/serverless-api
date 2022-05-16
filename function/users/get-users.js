@@ -1,21 +1,11 @@
-const res = require('express/lib/response');
 const connection = require('../connection');
 
 const getUsers = async (_event, context) => {
   try {
-    const result = await connection
+    return connection
       .promise()
-      .query('SELECT * FROM users')
+      .query('SELECT user_id, username, created_at FROM users')
       .then(([rows, _fields]) => rows);
-
-    // if (result.length) {
-    //   return await context
-    //     .headers({ 'Content-Type': 'Application/Json' })
-    //     .status(200)
-    //     .succeed(JSON.stringify({ data: result }));
-    // }
-
-    return result;
   } catch (error) {
     throw console.error({ get_users_error: error });
   }
