@@ -9,6 +9,8 @@ const getUsers = async (_event, context) => {
       .then(([rows, _fields]) => rows)
       .catch((err) => console.error({ err }));
 
+    console.log(result);
+
     return context
       .headers({ 'Content-Type': 'Application/Json' })
       .status(200)
