@@ -7,7 +7,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const handler = require('./conversion/handler');
+const handler = require('./function/handler');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 // const http = require('http');
@@ -101,6 +101,8 @@ class FunctionContext {
 
 const middleware = async (req, res) => {
   const cb = (err, functionResult) => {
+    console.log('FUNCTION', functionResult);
+
     if (err) {
       console.error(err);
 

@@ -27,7 +27,7 @@ COPY package.json ./
 RUN npm i
 
 # Copy outer function handler
-COPY index.js ./
+COPY app.js ./
 
 # COPY function node packages and install, adding this as a separate
 # entry allows caching of npm install
@@ -47,7 +47,7 @@ RUN npm test
 WORKDIR /home/app/
 
 ENV cgi_headers="true"
-ENV fprocess="node index.js"
+ENV fprocess="node app.js"
 ENV mode="http"
 ENV upstream_url="http://127.0.0.1:3000"
 

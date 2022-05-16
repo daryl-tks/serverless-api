@@ -1,5 +1,5 @@
 language: node12
-fprocess: node app.js
+fprocess: node index.js
 welcome_message: |
   You have created a new function which uses Node.js 12.
 
