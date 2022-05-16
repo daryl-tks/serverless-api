@@ -2,8 +2,6 @@ const connection = require('../connection');
 
 const getUsers = async (_event, context) => {
   try {
-    connection.connect();
-
     const result = await connection
       .promise()
       .query('SELECT user_id, username, created_at FROM users')
