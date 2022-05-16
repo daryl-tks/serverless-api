@@ -6,6 +6,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const connection = require('./utils/connection');
 
 // var indexRouter = require('./services/index');
 // var usersRouter = require('./services/users/get-users');
@@ -24,6 +25,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res, next) {
   res.send({ module: 'Conversion API v1' });
+});
+
+app.get('/users', function (_, res) {
+  connection.query('SELECT * FROM users', (err, result) => {
+    !err ? res.send({ data: result }) : res.status(400).send({ err_msg: err });
+  });
 });
 
 // app.use('/', );
