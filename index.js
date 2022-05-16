@@ -145,5 +145,5 @@ app.options('/*', middleware);
 const port = process.env.http_port || 3000;
 
 app.listen(port, () => {
-  console.log(`node12 listening on port: ${port}`);
+  console.log(`Server listening on port: ${port}`);
 });

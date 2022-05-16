@@ -1,6 +1,6 @@
 'use strict';
 
-// const { getUsers } = require('../services/users/get-users');
+const { getUsers } = require('../services/users/get-users.js');
 
 // module.exports = async (event, context) => {
 //   if (event.path == '/users') {
@@ -15,9 +15,9 @@
 //   return context.status(200).succeed(result);
 // };
 
-function getUsers(event, context) {
-  return context.status(200).succeed(['Jean', 'Joe', 'jane']);
-}
+// function getUsers(event, context) {
+//   return context.status(200).succeed(['Jean', 'Joe', 'jane']);
+// }
 
 module.exports = (event, context) => {
   if (event.path == '/users') {
