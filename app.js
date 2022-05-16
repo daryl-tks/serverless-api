@@ -6,12 +6,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const connection = require('./utils/connection');
+// const connection = require('./utils/connection');
+var mysql = require('mysql2');
+require('dotenv').config();
 
 // var indexRouter = require('./services/index');
 // var usersRouter = require('./services/users/get-users');
 
 var app = express();
+
+var connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB,
+  port: process.env.DB_PORT,
+});
+
+connection.connect((err) => {
+  !!err ? console.log('ERROR', err) : console.log('DB SERVER CONNECTED');
+});
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
