@@ -29,7 +29,7 @@ app.get('/', function (req, res, next) {
 
 app.get('/users', function (req, res) {
   try {
-    connection.query('SELECT * FROM conversion.users', (err, result) => {
+    connection.query('SELECT * FROM users', (err, result) => {
       !err
         ? res.send({ data: result })
         : res.status(500).send({ err_msg: err });
