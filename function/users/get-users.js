@@ -1,19 +1,18 @@
-const res = require('express/lib/response');
 const connection = require('../connection');
 
 const getUsers = async (_event, context) => {
   try {
-    console.log('GETUSErS');
+    console.log('GET USErS');
 
-    const result = await connection
+    return await connection
       .promise()
       .query('SELECT * FROM users')
-      .then(([rows, _fields]) => rows)
+      .then(([rows, _fields]) => context.status(200).succeed({ data: rows }))
       .catch((err) => console.error({ err }));
 
-    console.log('result,', result);
+    // console.log('result,', result);
 
-    return context.status(200).succeed(['Jean', 'Joe', 'jane']);
+    // return context.status(200).succeed(['Jean', 'Joe', 'jane']);
     // return context
     //   .headers({ 'Content-Type': 'Application/Json' })
     //   .status(200)
