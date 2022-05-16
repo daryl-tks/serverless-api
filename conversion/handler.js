@@ -1,6 +1,6 @@
 'use strict';
-const { getUsers } = require('../services/users/get-users');
-const connection = require('../utils/connection');
+// const { getUsers } = require('../services/users/get-users.js');
+const connection = require('../utils/connection.js');
 
 // module.exports = async (event, context) => {
 //   const result = {
@@ -13,12 +13,12 @@ const connection = require('../utils/connection');
 
 module.exports = (event, context) => {
   if (event.path == '/users') {
-    // return getUsers(event, context);
+    return getUsers(event, context);
   }
 
   return context.status(200).succeed('Welcome to conversion API');
 };
 
-// function users(event, context) {
-//   return context.status(200).succeed(['Jean', 'Joe', 'jane']);
-// }
+function getUsers(event, context) {
+  return context.status(200).succeed(['Jean', 'Joe', 'jane']);
+}
