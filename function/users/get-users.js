@@ -13,10 +13,11 @@ const getUsers = async (_event, context) => {
 
     console.log('result,', result);
 
-    return context
-      .headers({ 'Content-Type': 'Application/Json' })
-      .status(200)
-      .succeed({ data: result });
+    return context.status(200).succeed(['Jean', 'Joe', 'jane']);
+    // return context
+    //   .headers({ 'Content-Type': 'Application/Json' })
+    //   .status(200)
+    //   .succeed({ data: result });
   } catch (error) {
     throw console.error({ get_users_error: error });
   }
