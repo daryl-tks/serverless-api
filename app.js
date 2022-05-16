@@ -1,16 +1,15 @@
 'use strict';
 
 require('dotenv').config();
-var createError = require('http-errors');
-var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 const cors = require('cors');
-// const connection = require('./utils/connection');
 var mysql = require('mysql2');
-require('dotenv').config();
+var logger = require('morgan');
+var express = require('express');
+var createError = require('http-errors');
+var cookieParser = require('cookie-parser');
 
+// const connection = require('./utils/connection');
 // var indexRouter = require('./services/index');
 // var usersRouter = require('./services/users/get-users');
 
@@ -27,10 +26,6 @@ var connection = mysql.createConnection({
 connection.connect((err) => {
   !!err ? console.log('ERROR', err) : console.log('DB SERVER CONNECTED');
 });
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'pug');
 
 app.use(cors());
 app.use(logger('dev'));
