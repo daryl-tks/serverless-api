@@ -2,12 +2,12 @@
 
 const getUsers = require('./users/get-users');
 
-module.exports = async (event, context) => {
+module.exports = async (event, context, callback) => {
   if (event.path == '/users') {
-    return await getUsers(event, context).then(
-      async (result) => await context.succeed(result)
-    );
+    return await getUsers(event, context, callback);
   }
 
-  return context.status(200).succeed('Welcome to conversion API (function)');
+  if (event.path == '/') {
+    callback('Welcome to conversion API [function]');
+  }
 };

@@ -125,7 +125,7 @@ const middleware = async (req, res) => {
   const fnEvent = new FunctionEvent(req);
   const fnContext = new FunctionContext(cb);
 
-  Promise.resolve(handler(fnEvent, fnContext, cb))
+  await Promise.resolve(handler(fnEvent, fnContext, cb))
     .then((res) => {
       if (!fnContext.cbCalled) {
         fnContext.succeed(res);
