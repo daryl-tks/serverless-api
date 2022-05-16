@@ -43,10 +43,12 @@ app.get('/users', function (req, res) {
     connection.query('SELECT * FROM users', (err, result) => {
       console.log('RESULT', result);
       console.log('Error', err);
+
       !err ? res.send({ data: result }) : res.send({ err_msg: err });
     });
   } catch (error) {
     console.error({ error });
+    throw error;
   }
 });
 
