@@ -13,6 +13,24 @@ const getUsers = async (_event, context) => {
         .status(200)
         .succeed({ data: JSON.parse(result) });
     }
+
+    return context
+      .headers({ 'Content-Type': 'Application/Json' })
+      .status(200)
+      .succeed({
+        data: JSON.parse([
+          {
+            user_id: 1,
+            username: 'hello',
+            created_at: '2022-05-15T17:29:04.000Z',
+          },
+          {
+            user_id: 2,
+            username: 'world',
+            created_at: '2022-05-15T19:55:14.000Z',
+          },
+        ]),
+      });
   } catch (error) {
     throw console.error({ get_users_error: error });
   }

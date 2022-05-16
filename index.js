@@ -10,6 +10,7 @@ const app = express();
 const handler = require('./function/handler');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+// const http = require('http');
 
 const defaultMaxSize = '100kb'; // body-parser default
 
