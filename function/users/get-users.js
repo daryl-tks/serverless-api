@@ -8,20 +8,18 @@ const getUsers = async (_event, context) => {
     //   .query('SELECT * FROM users')
     //   .then(([rows, _fields]) => rows);
 
+    const data = [
+      {
+        user_id: 1,
+        username: 'hello',
+        created_at: '2022-05-15T17:29:04.000Z',
+      },
+    ];
+
     return await context
       .headers({ 'Content-Type': 'Application/Json' })
       .status(200)
-      .succeed(
-        JSON.stringify({
-          data: [
-            {
-              user_id: 1,
-              username: 'hello',
-              created_at: '2022-05-15T17:29:04.000Z',
-            },
-          ],
-        })
-      );
+      .succeed(JSON.stringify({ data }));
   } catch (error) {
     throw console.error({ get_users_error: error });
   }
