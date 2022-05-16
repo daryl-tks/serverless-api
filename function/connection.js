@@ -9,8 +9,8 @@ var connection = mysql.createConnection({
   port: process.env.DB_PORT,
 });
 
-connection.connect((err) => {
-  !!err ? console.log('ERROR', err) : console.log('DB SERVER CONNECTED');
-});
+// connection.connect((err) => {
+//   !!err ? console.log('ERROR', err) : console.log('DB SERVER CONNECTED');
+// });
 
 module.exports = connection;

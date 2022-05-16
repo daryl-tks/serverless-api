@@ -2,10 +2,14 @@ const connection = require('../connection');
 
 const getUsers = async (_event, context) => {
   try {
+    connection.connect();
+
     const result = await connection
       .promise()
       .query('SELECT user_id, username, created_at FROM users')
       .then(([rows], _fields) => JSON.stringify(rows));
+
+    connection.end();
 
     if (result.length) {
       return context
@@ -21,12 +25,12 @@ const getUsers = async (_event, context) => {
         data: JSON.parse([
           {
             user_id: 1,
-            username: 'hello',
+            username: 'hello123',
             created_at: '2022-05-15T17:29:04.000Z',
           },
           {
             user_id: 2,
-            username: 'world',
+            username: 'world123',
             created_at: '2022-05-15T19:55:14.000Z',
           },
         ]),
