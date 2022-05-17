@@ -41,7 +41,7 @@ app.get('/users', function (req, res) {
 });
 
 app.post('/users', function (req, res) {
-  const username = req.body.username;
+  const { username, isWeb } = req.body;
 
   connection.query(
     'SELECT username FROM users WHERE username = ?',
@@ -52,7 +52,7 @@ app.post('/users', function (req, res) {
       } else {
         connection.query(
           'INSERT INTO users SET ?',
-          [{ username }],
+          [{ username, isWeb }],
           (error, result) =>
             result.insertId
               ? res
